@@ -131,6 +131,34 @@ map.on('load', async () => {
     .attr('stroke-width', 1)
     .attr('opacity', 0.8);
 
+    const tooltip = d3
+    .select('#map')
+    .append('div')
+    .attr('id', 'tooltip')
+    .style('position', 'absolute')
+    .style('pointer-events', 'none')
+    .style('background', 'white')
+    .style('padding', '4px 8px')
+    .style('border-radius', '4px')
+    .style('font-size', '12px')
+    .style('box-shadow', '0 2px 6px rgba(0,0,0,0.3)')
+    .style('opacity', 0);
+      circles
+    .on('mouseenter', (event, d) => {
+      tooltip
+        .style('opacity', 1)
+        .text(
+          `${d.name ?? 'Station'}: ${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`
+        );
+    })
+    .on('mousemove', (event) => {
+      const [x, y] = d3.pointer(event, map.getContainer());
+      tooltip.style('left', x + 10 + 'px').style('top', y + 10 + 'px');
+    })
+    .on('mouseleave', () => {
+      tooltip.style('opacity', 0);
+    });
+
   function updatePositions() {
     circles
       .attr('cx', (d) => getCoords(d).cx)
