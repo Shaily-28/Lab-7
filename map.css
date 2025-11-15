@@ -5,17 +5,16 @@ body {
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: center; 
-  align-items: center;     
+  justify-content: center;
+  align-items: center;
 }
-
 
 #map {
   width: 100%;
   height: 100%;
+  position: relative;        
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  position: relative; 
 }
 
 
@@ -24,5 +23,16 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; 
+  z-index: 1;               
+  pointer-events: none;      
 }
+
+
+#map svg circle {
+  pointer-events: auto;      
+  fill: steelblue;
+  stroke: white;
+  stroke-width: 1px;
+  fill-opacity: 0.9;
+}
+
