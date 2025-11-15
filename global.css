@@ -36,3 +36,52 @@ label[for='time-slider'] {
   color: #666;
   font-style: italic;
 }
+#legend {
+  margin-top: 1em;
+  padding: 0.75em 1em;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  max-width: 18rem;
+}
+
+#legend h2 {
+  margin: 0 0 0.5em;
+  font-size: 0.95rem;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.85rem;
+  margin-bottom: 0.25em;
+}
+
+.legend-circle {
+  display: inline-block;
+  border-radius: 50%;
+  background: steelblue;
+  opacity: 0.8;
+}
+
+.legend-circle.small {
+  width: 6px;
+  height: 6px;
+}
+
+.legend-circle.medium {
+  width: 12px;
+  height: 12px;
+}
+
+.legend-circle.large {
+  width: 18px;
+  height: 18px;
+}
+
+.legend-note {
+  margin-top: 0.5em;
+  font-size: 0.8rem;
+  color: #555;
+}

@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bird Watching</title>
 
+    <link
+  href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
+  rel="stylesheet"
+/>
     <link rel="stylesheet" href="global.css" />
     <link rel="stylesheet" href="map.css" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -34,6 +38,30 @@
     <div id="map">
       <svg></svg>
     </div>
+
+    <section id="legend">
+  <h2>Traffic legend</h2>
+
+  <div class="legend-row">
+    <span class="legend-circle small"></span>
+    <span>Low bike traffic</span>
+  </div>
+
+  <div class="legend-row">
+    <span class="legend-circle medium"></span>
+    <span>Medium bike traffic</span>
+  </div>
+
+  <div class="legend-row">
+    <span class="legend-circle large"></span>
+    <span>High bike traffic</span>
+  </div>
+
+  <p class="legend-note">
+    Circle size & color both show total trips
+    (arrivals + departures) at each station.
+  </p>
+</section>
 
     <script src="map.js" type="module"></script>
   </body>

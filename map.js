@@ -152,17 +152,20 @@ map.on('load', async () => {
     .scaleSqrt()
     .domain([0, d3.max(stations, (d) => d.totalTraffic)])
     .range([0, 25]);
+  const colorScale = d3
+  .scaleSequential(d3.interpolateYlGnBu) 
+  .domain([0, d3.max(stations, (d) => d.totalTraffic)]);
 
   const circles = svg
-    .selectAll('circle')
-    .data(stations, (d) => d.short_name)
-    .enter()
-    .append('circle')
-    .attr('fill', 'steelblue')
-    .attr('stroke', 'white')
-    .attr('stroke-width', 1)
-    .attr('opacity', 0.8)
-    .attr('r', (d) => radiusScale(d.totalTraffic));
+  .selectAll('circle')
+  .data(stations, (d) => d.short_name)
+  .enter()
+  .append('circle')
+  .attr('fill', (d) => colorScale(d.totalTraffic))
+  .attr('stroke', 'white')
+  .attr('stroke-width', 1)
+  .attr('opacity', 0.8)
+  .attr('r', (d) => radiusScale(d.totalTraffic));
 
 
   const tooltip = d3
@@ -221,16 +224,19 @@ map.on('load', async () => {
   }
 
   function updateScatterPlot(timeFilter) {
-    const filteredTrips = filterTripsByTime(trips, timeFilter);
-    computeStationTraffic(stations, filteredTrips);
+  const filteredTrips = filterTripsByTime(trips, timeFilter);
+  computeStationTraffic(stations, filteredTrips); // mutates station objects
 
-    radiusScale.domain([
-      0,
-      d3.max(stations, (d) => d.totalTraffic) || 0,
-    ]);
+  const maxTraffic = d3.max(stations, (d) => d.totalTraffic) || 0;
 
-    circles.attr('r', (d) => radiusScale(d.totalTraffic));
-  }
+  radiusScale.domain([0, maxTraffic]);
+  colorScale.domain([0, maxTraffic]);
+
+  circles
+    .attr('r', (d) => radiusScale(d.totalTraffic))
+    .attr('fill', (d) => colorScale(d.totalTraffic));
+}
+
 
   timeSlider.addEventListener('input', () => {
     const timeFilter = Number(timeSlider.value);
